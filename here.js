@@ -5,7 +5,7 @@ client.on("message", message => {
  
 gplay.search({
     term: app,
-    num: 2
+    num: 1
 })
   .then(data => {
       let resultEmbed = new Discord.RichEmbed()
