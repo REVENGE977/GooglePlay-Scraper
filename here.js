@@ -5,7 +5,7 @@ client.on("message", message => {
  
 gplay.search({
     term: app,
-    num: 1
+    num: 2
 })
   .then(data => {
       let resultEmbed = new Discord.RichEmbed()
@@ -14,6 +14,7 @@ gplay.search({
       .setTitle("Search Result:")
       .setDescription(data[0].title)
       .addField("**Title:**", data[0].title, true)
+      .addField("**Description:**", data[0].summary, true)
       .addField("**AppID:**", data[0].appId, true)
       .addField("**Developer:**", data[0].developer, true)
       .addField("**Price:**", data[0].priceText, true)
