@@ -4,8 +4,8 @@ client.on("message", message => {
         if(!app) return message.channel.send("Error: Please Type The App Name After The Command !")
  
 gplay.search({
-    term: "Discord",
-    num: 2
+    term: app,
+    num: 1
 })
   .then(data => {
       let resultEmbed = new Discord.RichEmbed()
