@@ -1,27 +1,44 @@
-client.on("message", message => {
-    let app = message.content.split(" ").slice(1).join(" ");
-    if(message.content.startsWith(prefix + "googleplay")) {
-        if(!app) return message.channel.send("Error: Please Type The App Name After The Command !")
- 
-gplay.search({
-    term: app,
-    num: 1
+const gplay = require("google-play-scraper")
+const Discord = require("discord.js")
+const token = "REPLACE WITH YOUR OWN BOT'S TOKEN"
+const prefix = "g?"
+const client = new Discord.Client()
+
+client.once("ready", () => {
+    console.log("Scrapper bot's ready")
 })
-  .then(data => {
-      let resultEmbed = new Discord.RichEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL)
-      .setThumbnail(data[0].icon)
-      .setTitle("Search Result:")
-      .setDescription(data[0].title)
-      .addField("**Title:**", data[0].title, true)
-      .addField("**Description:**", data[0].summary, true)
-      .addField("**AppID:**", data[0].appId, true)
-      .addField("**Developer:**", data[0].developer, true)
-      .addField("**Price:**", data[0].priceText, true)
-      .addField("**Rate:**", data[0].scoreText, true)
-      .setColor("#2F3136")
-      message.channel.send(resultEmbed);        
-  })
-  
+
+client.on("message", (message) => {
+
+    const args = message.content.split(/ /)
+    const cmd = args.shift()
+
+    if (cmd == `${prefix}scrap`) {
+        let query = args.join(" ")
+        if (query) {
+            gplay.search({
+                term: query,
+                num: 1
+            }).then((res) => {
+                const game = res[0]
+                const gameEmbed = new Discord.RichEmbed()
+                    .setTitle(game.title)
+                    .setDescription(game.summary + `\n\n[Click here to visit](${game.url})`)
+                    .addField("Score: ", game.scoreText, true)
+                    .addField("Price: ", game.priceText, true)
+                    .setThumbnail(game.icon)
+                    .setTimestamp(Date())
+                    .setColor(0x008000)
+                return message.channel.send(gameEmbed)
+            })
+
+        } else {
+
+            return message.reply(`Thanks to put a research. Ex: "${prefix}scrap panda"`)
+        }
     }
+})
+
+client.login(token).catch((_) => {
+    console.log("The token may have expired or is invalid. Please, restart with a new token.")
 })
