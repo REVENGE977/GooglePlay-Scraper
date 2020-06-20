@@ -35,14 +35,3 @@ It's pretty secure. Take care to not making to many requests to the google-play-
 I'm not held responsible for any potential penalty applied to your account by Discord or an IP ban from Google Play.
 <hr>
 
-### Social networks:
-Twitter: [https://www.twitter.com/@Coding_exe](https://www.twitter.com/@Coding_exe)
-
-Instagram: [https://www.instagram.com/\_ml.drd\_](https://www.instagram.com/_ml.drd_)
-
-<hr>
-
-### Donation:
-Paypal: [https://www.paypal.me/codingexe](https://www.paypal.me/codingexe)
-
-Thanks to futur donators ! :heart:
